@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fullscreen Slideshow</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; font-family: sans-serif; overflow: hidden; }
+
+    .slideshow {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .overlay {
+      position: absolute;
+      bottom: 5%;
+      left: 5%;
+      background: rgba(249, 130, 3, 0.599);
+      color: white;
+      padding: 50px;
+      border-radius: 10px;
+      animation: fadeInUp 1.5s ease;
+    }
+
+    .overlay2 {
+      position: absolute;
+      bottom: 25%;
+      right: 5%;
+      background: rgba(249, 130, 3, 0.599);
+      color: white;
+      padding: 50px;
+      border-radius: 10px;
+      animation: fadeInUp 1.5s ease;
+    }
+
+    h1{
+        font-size: 200px;
+    }
+
+    p {
+        font-size: 42px;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="slideshow">
+    <div class="slide active" style="background-image: url('slide1.png');">
+      <div class="overlay">
+        <h1>Pizza*</h1>
+        <p>1 Pizza slice <strong>€2,50</strong><br>Hele pizza <strong>€10,00</strong><br>Zelf maken? (mini-workshop)  <strong>€15,-</strong></p>
+      </div>
+    </div>
+    <div class="slide" style="background-image: url('slide2.png');">
+      <div class="overlay">
+        <h1>Tosti*</h1>
+        <p>Kaas <strong>€2,00</strong><br>Ham kaas <strong>€2,50</strong></p>
+      </div>
+    </div>
+    <div class="slide" style="background-image: url('slide3.jpg');">
+      <div class="overlay2">
+        <h1>Gambia</h1>
+        <p>Scan de QR-code voor info</p>
+        <img src="Steunactie-qr-code.png" alt="QR Code" style="width: 250px; margin-top: 10px;">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+
+    function nextSlide() {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }
+
+    setInterval(nextSlide, 5000); // 5 seconds per slide
+  </script>
+</body>
+</html>
